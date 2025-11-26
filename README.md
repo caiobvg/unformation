@@ -1,9 +1,10 @@
 # unformation
 
-![Version](https://img.shields.io/badge/version-1.0-blue?style=for-the-badge)
-![Chrome](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![CSS](https://img.shields.io/badge/CSS3-Premium_UI-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Version](https://img.shields.io/badge/Version-1.0-5A00CC?style=for-the-badge&logoColor=white)
+![Chrome](https://img.shields.io/badge/Chrome-Extension-7A1FE6?style=for-the-badge&logo=google-chrome&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML-%3C%2F%3E-8F39F9?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-%7B%7D-A66CFF?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-()-C9A7FF?style=for-the-badge&logo=javascript&logoColor=white)
 
 finds people who don't follow you back on soundcloud.
 
