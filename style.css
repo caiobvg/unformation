@@ -4,21 +4,25 @@
   --text-primary: #1a1a1a;
   --text-secondary: #666666;
   --border-color: #e0e0e0;
-  
+
   --brand-color: #6200ea;
   --brand-hover: #5000c2;
   --brand-light: #efe5fd;
-  
+
   --accent-color: #ff5500;
   --success-color: #00c853;
   --danger-color: #d32f2f;
-  
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  
+
+  /* Instagram colors */
+  --instagram-solid: #E1306C;
+  --instagram-hover: #C13584;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+
   --radius-sm: 8px;
   --radius-md: 12px;
-  
+
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -28,11 +32,11 @@ body.dark-theme {
   --text-primary: #ffffff;
   --text-secondary: #a0a0a0;
   --border-color: #2c2c2c;
-  
+
   --brand-light: #2a1a4a;
-  
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -128,18 +132,19 @@ header h1 {
   width: 18px;
   border-radius: 50%;
   z-index: 2;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--brand-color);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(24px);
 }
 
-.icon-sun, .icon-moon {
+.icon-sun,
+.icon-moon {
   z-index: 1;
   user-select: none;
 }
@@ -210,6 +215,57 @@ body.dark-theme .card-btn:hover:not(.disabled) {
   cursor: not-allowed;
   background-color: var(--bg-color);
   border-style: dashed;
+}
+
+#btn-instagram {
+  border-left: 6px solid var(--instagram-solid);
+}
+
+#btn-instagram::after {
+  content: 'Active';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.6rem;
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.btn-icon-instagram {
+  width: 32px;
+  height: 32px;
+}
+
+#ig-scanner-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.primary-btn-ig {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  box-shadow: 0 4px 6px rgba(225, 48, 108, 0.3);
+}
+
+.primary-btn-ig:hover {
+  background: linear-gradient(45deg, #e6683c, #dc2743, #cc2366, #bc1888, #833ab4);
+  box-shadow: 0 6px 12px rgba(225, 48, 108, 0.4);
+}
+
+#ig-results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--card-bg);
 }
 
 #sc-scanner-view {
@@ -342,6 +398,8 @@ h2 span {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border-color);
+  background-color: var(--border-color);
+  flex-shrink: 0;
 }
 
 .user-details {
@@ -454,7 +512,7 @@ h2 span {
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 #monitor-bar {
@@ -463,15 +521,13 @@ h2 span {
   background: linear-gradient(90deg, var(--brand-color) 0%, #9d46ff 100%);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   background-size: 20px 20px;
-  background-image: linear-gradient(
-    45deg,
-    rgba(157, 70, 255, 0.3) 25%,
-    rgba(157, 70, 255, 0.1) 25%,
-    rgba(157, 70, 255, 0.1) 50%,
-    rgba(157, 70, 255, 0.3) 50%,
-    rgba(157, 70, 255, 0.3) 75%,
-    transparent
-  );
+  background-image: linear-gradient(45deg,
+      rgba(157, 70, 255, 0.3) 25%,
+      rgba(157, 70, 255, 0.1) 25%,
+      rgba(157, 70, 255, 0.1) 50%,
+      rgba(157, 70, 255, 0.3) 50%,
+      rgba(157, 70, 255, 0.3) 75%,
+      transparent);
   animation: progress-stripes 2s linear infinite;
 }
 
@@ -483,7 +539,7 @@ h2 span {
   color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   z-index: 2;
   letter-spacing: 0.5px;
 }
@@ -506,30 +562,52 @@ h2 span {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes progress-stripes {
-  0% { background-position: 100% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
 }
 
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
 }

@@ -1,19 +1,22 @@
 {
   "manifest_version": 3,
   "name": "Unformation",
-  "version": "1.0",
-  "description": "Check who doesn't follow you back on your social networks. Current support: SoundCloud.",
+  "version": "1.1",
+  "description": "Check who doesn't follow you back on your social networks. Current support: SoundCloud, Instagram.",
   "permissions": [
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "cookies"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "host_permissions": [
     "https://api-v2.soundcloud.com/*",
-    "https://soundcloud.com/*"
+    "https://soundcloud.com/*",
+    "https://www.instagram.com/*",
+    "https://instagram.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
