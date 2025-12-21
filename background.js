@@ -43,7 +43,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       lastLog: 'Status check...'
     });
   } else if (message.type === 'FETCH_IMAGE') {
-    // Fetch image and convert to base64
     fetch(message.url)
       .then(response => response.blob())
       .then(blob => {
@@ -56,7 +55,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       .catch(error => {
         sendResponse({ success: false, error: error.message });
       });
-    return true; // Keep message channel open for async response
+    return true;
   }
 });
 

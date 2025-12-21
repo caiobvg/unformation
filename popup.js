@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const monitorLog = document.getElementById('monitor-log');
   const btnCancelBg = document.getElementById('btn-cancel-bg');
 
-  // SoundCloud elements
   const btnSoundCloud = document.getElementById('btn-soundcloud');
   const btnBack = document.getElementById('btn-back');
   const btnScan = document.getElementById('btn-scan');
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnUnfollowSelected = document.getElementById('btn-unfollow-selected');
   const bulkActionsDiv = document.getElementById('bulk-actions');
 
-  // Instagram elements
   const btnInstagram = document.getElementById('btn-instagram');
   const btnBackIg = document.getElementById('btn-back-ig');
   const btnScanIg = document.getElementById('btn-scan-ig');
@@ -312,10 +310,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // ============================================
-  // INSTAGRAM FUNCTIONALITY
-  // ============================================
-
   btnScanIg.addEventListener('click', async () => {
     const statusText = document.getElementById('ig-status-text');
     const resultsList = document.getElementById('ig-results-list');
@@ -392,7 +386,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   async function getInstagramCredentials(tabId) {
-    // Use chrome.cookies API to access HttpOnly cookies
     const getCookie = async (name) => {
       const cookie = await chrome.cookies.get({
         url: 'https://www.instagram.com',
@@ -424,8 +417,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     let endCursor = null;
 
     const queryHash = type === 'followers'
-      ? 'c76146de99bb02f6415203be841dd25a'  // followers query hash
-      : 'd04b0a864b4b54837c0d870b0e77e076'; // following query hash
+      ? 'c76146de99bb02f6415203be841dd25a'
+      : 'd04b0a864b4b54837c0d870b0e77e076';
 
     const edgeName = type === 'followers' ? 'edge_followed_by' : 'edge_follow';
 
@@ -502,7 +495,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const li = document.createElement('li');
       li.className = 'user-item';
 
-      // Create fallback SVG
       const fallbackSvg = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23E1306C%22/><text x=%2250%22 y=%2265%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2240%22>${user.username.charAt(0).toUpperCase()}</text></svg>`;
 
       li.innerHTML = `
@@ -517,24 +509,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         <button class="unfollow-btn" data-user-id="${user.id}">Unfollow</button>
       `;
 
-      // Try to load actual image
       const img = li.querySelector('.user-avatar');
       if (user.avatar_url) {
-        fetch(user.avatar_url, { mode: 'no-cors' })
-          .then(() => {
-            // If no-cors works, just set the src directly
-            const testImg = new Image();
-            testImg.onload = () => {
-              img.src = user.avatar_url;
-            };
-            testImg.onerror = () => {
-              // Keep fallback
-            };
-            testImg.src = user.avatar_url;
-          })
-          .catch(() => {
-            // Keep fallback SVG
-          });
+        chrome.runtime.sendMessage(
+          { type: 'FETCH_IMAGE', url: user.avatar_url },
+          (response) => {
+            if (response && response.success && response.dataUrl) {
+              img.src = response.dataUrl;
+            }
+          }
+        );
       }
 
       const btn = li.querySelector('.unfollow-btn');
